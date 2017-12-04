@@ -8,6 +8,52 @@ html, body {
   margin: 0;
 }
 
+.order-container
+{
+  min-height: 100px;
+  width: 90%;
+  border-style: ridge;
+  margin-left: 20px;
+  border-radius: 10px;
+}
+
+.order-table
+{
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.order-row
+{
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.order-title
+{
+
+}
+
+.accept-order
+{
+  margin-top: 10px;
+  background-color:  #6a5750;
+  outline: none;
+  color: #f6f1ed;
+  height: 50px;
+  width: 200px;
+  border-style: solid;
+  border-color: #f6f1ed;
+  font-size: 25px;
+  font-family: helvetica, sans-serif;
+}
+
+.accept-order:hover
+{
+  background-color: #b5a397;
+}
+
 /*Header styling */
 
 .site-title

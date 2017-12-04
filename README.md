@@ -1,2 +1,0 @@
-# DatabasesProject
-Databases Project
