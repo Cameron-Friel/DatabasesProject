@@ -16,8 +16,9 @@
 		 <a class = "site-signin" href = "login.php">Login</a></h2>
 
 		 <ul class="navlist">
-			 <li class="navitem"><a href="home.php">Home</a></li>
+			 <li class="navitem"><a href="home.php">Home</a></li>	
 			 <li class="navitem"><a href="about.php">About</a></li>
+			 <li class="navitem"><a href="itemList.php">Item List</a></li>
 			 <li class="navitem"><a href="login.php">Account</a></li>
 			 <li class="navitem"><a href="#">History</a></li>
 		 </ul>
