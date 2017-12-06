@@ -9,6 +9,7 @@
   <link type="text/css" rel="stylesheet" href="style.css" media = "screen">
 
   <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+   <link rel="icon" href="https://image.flaticon.com/icons/png/512/2/2772.png">
 
 </head>
 
@@ -16,14 +17,12 @@
 
 <header>
 
-  <h2 class = "site-title"> Food United <a class = "site-signin" href="newShopper.php">Sign In</a></h2>
+  <h2 class = "site-title"> Food United <a class = "site-signin" href="newShopper.php">Sign Up</a></h2>
 
   <ul class="navlist">
     <li class="navitem"><a href="home.php">Home</a></li>
     <li class="navitem"><a href="about.php">About</a></li>
     <li class="navitem"><a href="itemList.php">Item List</a></li>
-     <li class="navitem"><a href="login.php">Account</a></li>
-    <li class="navitem"><a href="#">History</a></li>
   </ul>
 
 </header>
@@ -39,6 +38,8 @@
   </form>
 
 </div>
+
+<p class = "change-para"><a href = "pickerLogin.php" class = "change-link">Want to be a Picker Upper? Click here!</a></p>
 
 <footer>
  <div class="pageFooter">

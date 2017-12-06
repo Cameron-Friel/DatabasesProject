@@ -9,6 +9,7 @@
   <link type="text/css" rel="stylesheet" href="style.css" media = "screen">
 
   <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+  <link rel="icon" href="https://image.flaticon.com/icons/png/512/2/2772.png">
 
 </head>
 

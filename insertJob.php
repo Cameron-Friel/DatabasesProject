@@ -18,13 +18,8 @@
 				die('Could not connect: ' . mysql_error());
 		    }
 
-      //$name = $_GET['picker'];
-      //$order = $_GET['order'];
       $name = $_POST['picker'];
       $order = $_POST['order'];
-
-			echo $name;
-			echo $order;
 
       $query = "UPDATE Orders SET EmployeeID='$name' WHERE OrderID='$order'";
 
@@ -39,7 +34,5 @@
  src="https://code.jquery.com/jquery-3.2.1.min.js"
  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
  crossorigin="anonymous"></script>
-
- <script type="text/javascript" src="home.js"></script>
 
 </html>

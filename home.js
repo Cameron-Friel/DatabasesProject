@@ -22,12 +22,4 @@ $(document).ready(function()
     $images.eq(index - 1).css("display", "block");
     setTimeout(changeImage, 2000);
   }
-
-  function removeHeader()
-  {
-    if (isset($_SESSION['user']))
-    {
-      echo "<script> $('.site-sign').hide();</script>";
-    }
-  }
 });

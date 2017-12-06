@@ -9,6 +9,7 @@
   <link type="text/css" rel="stylesheet" href="style.css" media = "screen">
 
   <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+   <link rel="icon" href="https://image.flaticon.com/icons/png/512/2/2772.png">
 
 </head>
 
@@ -22,8 +23,6 @@
     <li class="navitem"><a href="home.php">Home</a></li>
     <li class="navitem"><a href="about.php">About</a></li>
     <li class="navitem"><a href="itemList.php">Item List</a></li>
-    <li class="navitem"><a href="login.php">Account</a></li>
-    <li class="navitem"><a href="#">History</a></li>
   </ul>
 
 </header>

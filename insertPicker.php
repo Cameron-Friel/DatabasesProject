@@ -21,7 +21,7 @@
    <ul class="navlist">
      <li class="navitem"><a href="home.php">Home</a></li>
      <li class="navitem"><a href="about.php">About</a></li>
-     <li class="navitem"><a href="login.php">Account</a></li>
+     <li class="navitem"><a href="pickerAccount.php">Orders</a></li>
      <li class="navitem"><a href="#">History</a></li>
    </ul>
 
@@ -91,7 +91,7 @@
     $sendID += 1;
 
     $query = "INSERT INTO Picker_upper (Username, Password, First_name, Last_name, Phone_number, Credit_card,
-    Address, ShopperID) VALUES ('$username', '$password', '$first', '$last', '$phone_number', '$credit_card',
+    Address, EmployeeID) VALUES ('$username', '$password', '$first', '$last', '$phone_number', '$credit_card',
     '$address', '$sendID')";
 
     if (mysqli_query($conn, $query))

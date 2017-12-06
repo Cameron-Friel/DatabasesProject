@@ -2,10 +2,11 @@
 
 <html>
 	<head>
-		<title>Home Page</title>
+		<title>Orders</title>
 		<link rel="stylesheet" href="style.css">
 
 		<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+		 <link rel="icon" href="https://image.flaticon.com/icons/png/512/2/2772.png">
 	</head>
 
   <body>
@@ -13,13 +14,13 @@
 		<header>
 
 		 <h2 class = "site-title"> Food United<a class = "site-signin" href="newShopper.php">Sign In</a>
-		 <a class = "site-signin" href = "login.php">Login</a></h2>
+		 <a class = "site-signin" href = "login.php">Login</a><a class = "site-logout" href = "logout.php">Logout</a></h2>
 
 		 <ul class="navlist">
 			 <li class="navitem"><a href="home.php">Home</a></li>
 			 <li class="navitem"><a href="about.php">About</a></li>
-			 <li class="navitem"><a href="login.php">Account</a></li>
-			 <li class="navitem"><a href="#">History</a></li>
+			 <li class="navitem"><a href="pickerAccount.php">Orders</a></li>
+			 <li class="navitem"><a href="pickerHistory.php">History</a></li>
 		 </ul>
 
 	 </header>
@@ -27,6 +28,8 @@
    <h2 class = "account-overview">List of orders to take</h2>
 
    <?php
+	 		session_start();
+
       include 'connectvarsEECS.php';
 
       $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -71,10 +74,11 @@
           $currentID = $orders[$i]['OrderID'];
 
           echo "</table>";
-          echo "<p class 'total-order'>Total: ".$orders[$count]['Total']."</p>";
+          echo "<p class = 'total-order'>Total: ".$orders[$count]['Total']."</p>";
           echo "<form action = 'insertJob.php' type = 'post'>";
-          echo "<input type='text' name='picker' value='0' class = 'pick-name' style = 'display:none'>";
-          echo "<button name = 'order' value='".$orders[$count]['OrderID']."' type = 'submit' class = 'accept-order'>Accept Order</button>";
+          echo "<input type='text' name='picker' value='".$_SESSION['id']."' class = 'pick-name' style = 'display:none'>";
+					echo "<input type='text' name='order' value='".$orders[$count]['OrderID']."' class = 'order-name' style = 'display:none'>";
+				  echo "<button type = 'submit' class = 'accept-order'>Accept Order</button>";
           echo "</form>";
           echo "</div>";
 
@@ -98,10 +102,11 @@
       if ($length > 0)
       {
         echo "</table>";
-        echo "<p class 'total-order'>Total: ".$orders[$length - 1]['Total']."</p>";
+        echo "<p class = 'total-order'>Total: ".$orders[$length - 1]['Total']."</p>";
         echo "<form action = 'insertJob.php' type = 'post'>";
-        echo "<input type='text' name='picker' value='0' class = 'pick-name' style = 'display:none'>";
-        echo "<button name = 'order' value='".$orders[$length - 1]['OrderID']."' type = 'submit' class = 'accept-order'>Accept Order</button>";
+        echo "<input type='text' name='picker' value='".$_SESSION['id']."' class = 'pick-name' style = 'display:none'>";
+				echo "<input type='text' name='order' value='".$orders[$length - 1]['OrderID']."' class = 'order-name' style = 'display:none'>";
+				echo "<button type = 'submit' class = 'accept-order'>Accept Order</button>";
         echo "</form>";
         echo "</div>";
       }
@@ -109,132 +114,6 @@
     	mysqli_free_result($result);
     	mysqli_close($conn);
     ?>
-
-  <!-- <div class = "order-container">
-      <h2 class = "order-title">Order 12</h2>
-      <h2 class = "click"> Products Ordered List:</h2>
-      <table class = "order-table">
-        <tr>
-          <th class = "order-row">First Name</th>
-          <th class = "order-row">Last Name</th>
-          <th class = "order-row">Points</th>
-        </tr>
-        <tr>
-          <td class = "order-row">Peter</td>
-          <td class = "order-row">Griffin</td>
-          <td class = "order-row">$100</td>
-        </tr>
-        <tr>
-          <td class = "order-row">Lois</td>
-          <td class = "order-row">Griffin</td>
-          <td class = "order-row">$150</td>
-        </tr>
-        <tr>
-          <td class = "order-row">Joe</td>
-          <td class = "order-row">Swanson</td>
-          <td class = "order-row">$300</td>
-        </tr>
-        <tr>
-          <td class = "order-row">Cleveland</td>
-          <td class = "order-row">Brown</td>
-          <td class = "order-row">$250</td>
-        </tr>
-        <tr>
-          <td class = "order-row">Cleveland</td>
-          <td class = "order-row">Brown</td>
-          <td class = "order-row">$250</td>
-        </tr>
-        <tr>
-          <td class = "order-row">Cleveland</td>
-          <td class = "order-row">Brown</td>
-          <td class = "order-row">$250</td>
-        </tr>
-        <tr>
-          <td class = "order-row">Cleveland</td>
-          <td class = "order-row">Brown</td>
-          <td class = "order-row">$250</td>
-        </tr>
-        <tr>
-          <td class = "order-row">Cleveland</td>
-          <td class = "order-row">Brown</td>
-          <td class = "order-row">$250</td>
-        </tr>
-        <tr>
-          <td class = "order-row">Cleveland</td>
-          <td class = "order-row">Brown</td>
-          <td class = "order-row">$250</td>
-        </tr>
-    </table>
-
-    <p class "total-order">Total: 17</p>
-
-    <input type = "submit" value = "Accept Order" class = "accept-order">
-
-    </div>
-
-    <div class = "order-container">
-      <h2 class = "order-title">Order 12</h2>
-      <h2 class = "click"> Products Ordered List:</h2>
-      <table class = "order-table">
-        <tr>
-          <th class = "order-row">First Name</th>
-          <th class = "order-row">Last Name</th>
-          <th class = "order-row">Points</th>
-        </tr>
-        <tr>
-          <td class = "order-row">Peter</td>
-          <td class = "order-row">Griffin</td>
-          <td class = "order-row">$100</td>
-        </tr>
-        <tr>
-          <td class = "order-row">Lois</td>
-          <td class = "order-row">Griffin</td>
-          <td class = "order-row">$150</td>
-        </tr>
-        <tr>
-          <td class = "order-row">Joe</td>
-          <td class = "order-row">Swanson</td>
-          <td class = "order-row">$300</td>
-        </tr>
-        <tr>
-          <td class = "order-row">Cleveland</td>
-          <td class = "order-row">Brown</td>
-          <td class = "order-row">$250</td>
-        </tr>
-        <tr>
-          <td class = "order-row">Cleveland</td>
-          <td class = "order-row">Brown</td>
-          <td class = "order-row">$250</td>
-        </tr>
-        <tr>
-          <td class = "order-row">Cleveland</td>
-          <td class = "order-row">Brown</td>
-          <td class = "order-row">$250</td>
-        </tr>
-        <tr>
-          <td class = "order-row">Cleveland</td>
-          <td class = "order-row">Brown</td>
-          <td class = "order-row">$250</td>
-        </tr>
-        <tr>
-          <td class = "order-row">Cleveland</td>
-          <td class = "order-row">Brown</td>
-          <td class = "order-row">$250</td>
-        </tr>
-        <tr>
-          <td class = "order-row">Cleveland</td>
-          <td class = "order-row">Brown</td>
-          <td class = "order-row">$250</td>
-        </tr>
-    </table>
-
-    <p class = "total-order">Total: 18 </p>
-
-    <input type = "submit" value = "Accept Order" class = "accept-order">
-
-  </div> -->
-
-
 
    <div class = "push"></div>
 
@@ -254,5 +133,16 @@ integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 crossorigin="anonymous"></script>
 
 <script type="text/javascript" src="pickerAccount.js"></script>
+
+<?php
+	 if (isset($_SESSION['user']))
+	 {
+		 echo "<script>$('.site-signin').hide();</script>";
+	 }
+	 else
+	 {
+		 echo "<script>$('.site-logout').hide();</script>";
+	 }
+?>
 
 </html>

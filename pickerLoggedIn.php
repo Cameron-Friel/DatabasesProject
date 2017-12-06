@@ -7,6 +7,7 @@
   <meta charset="utf-8">
 
   <link type="text/css" rel="stylesheet" href="style.css" media = "screen">
+   <link rel="icon" href="https://image.flaticon.com/icons/png/512/2/2772.png">
 
 </head>
 
@@ -19,7 +20,8 @@
   <ul class="navlist">
     <li class="navitem"><a href="home.php">Home</a></li>
     <li class="navitem"><a href="about.php">About</a></li>
-    <li class="navitem"><a href="itemList.php">Item List</a></li>
+    <li class="navitem"><a href="pickerAccount.php">Orders</a></li>
+    <li class="navitem"><a href="pickerHistory.php">History</a></li>
   </ul>
 
 </header>
@@ -39,21 +41,30 @@
     $username = mysqli_real_escape_string($conn, $_POST['Username']);
     $password = mysqli_real_escape_string($conn, $_POST['Password']);
 
-    $sql = "SELECT Username FROM Picker_upper WHERE Username = '$username'
+    $sql = "SELECT Username, EmployeeID FROM Picker_upper WHERE Username = '$username'
     AND Password = '$password'";
 
     $result = mysqli_query($conn, $sql);
 
+    $myUser = array();
+
+    while ($row = mysqli_fetch_assoc($result))
+    {
+      $myUser[] = $row;
+    }
+
     if (mysqli_num_rows($result) > 0)
     {
       $_SESSION['user'] = $username;
+      $_SESSION['id'] = $myUser[0]['EmployeeID'];
+      $_SESSION['position'] = "employee";
       echo "<p> Welcome back, ".$_SESSION['user'].". </p>";
     }
     else
     {
       echo "<script>
       alert('Incorrect username or password');
-      window.location.href='login.php';
+      window.location.href='pickerLogin.php';
       </script>";
       exit();
     }
