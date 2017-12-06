@@ -24,7 +24,7 @@
 
 	 </header>
 
-   <h2>List of orders to take</h2>
+   <h2 class = "account-overview">List of orders to take</h2>
 
    <?php
       include 'connectvarsEECS.php';
@@ -34,10 +34,10 @@
         die('Could not connect: ' . mysql_error());
       }
 
-      $query = "SELECT O.OrderID, S.Total, G.Name, P.Quantity FROM Orders O,
-      Grocery_item G, Purchased_item P, Shopping_cart S WHERE O.EmployeeID IS NULL AND
+      $query = "SELECT O.OrderID, S.Total, G.Name, P.Quantity, Sh.Address FROM Orders O,
+      Grocery_item G, Purchased_item P, Shopping_cart S, Shopper Sh WHERE O.EmployeeID IS NULL AND
       O.ShoppingID = S.ShoppingID AND S.ShoppingID = P.ShoppingID AND P.ItemID = G.ItemID
-      ORDER BY O.OrderID";
+      AND Sh.ShopperID = S.ShopperID ORDER BY O.OrderID";
 
       $result = mysqli_query($conn, $query);
 
@@ -56,7 +56,7 @@
       {
         echo "<div class = 'order-container'>";
         echo "<h2 class = 'order-title'>Order ".$orders[0]['OrderID']." </h2>";
-        echo "<h2 class = 'click'> Products Ordered List:</h2>";
+        echo "<h2 class = 'click'> Address: ".$orders[0]['Address']."</h2>";
         echo "<table class = 'order-table'>";
         echo "<tr>";
         echo "<th class = 'order-row'>Product Name</th>";
@@ -80,7 +80,7 @@
 
           echo "<div class = 'order-container'>";
           echo "<h2 class = 'order-title'>Order ".$orders[$i]['OrderID']." </h2>";
-          echo "<h2 class = 'click'> Products Ordered List:</h2>";
+          echo "<h2 class = 'click'> Address: ".$orders[$i]['Address']."</h2>";
           echo "<table class = 'order-table'>";
           echo "<tr>";
           echo "<th class = 'order-row'>Product Name</th>";

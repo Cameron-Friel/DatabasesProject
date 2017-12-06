@@ -18,10 +18,13 @@
 				die('Could not connect: ' . mysql_error());
 		    }
 
-      $name = $_GET['picker'];
-      $order = $_GET['order'];
-      //$name = $_POST['picker'];
-      //$order = $_POST['order'];
+      //$name = $_GET['picker'];
+      //$order = $_GET['order'];
+      $name = $_POST['picker'];
+      $order = $_POST['order'];
+
+			echo $name;
+			echo $order;
 
       $query = "UPDATE Orders SET EmployeeID='$name' WHERE OrderID='$order'";
 

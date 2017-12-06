@@ -16,37 +16,39 @@
 <div id="tableZT">
     <?php
 
-	include 'connectvarsEECS.php'; 
-	
+    session_start();
+
+	include 'connectvarsEECS.php';
+
     	$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	if (!$conn) {
 		die('Could not connect: ' . mysql_error());
 	}
-// Retrieve name of table selected	
+// Retrieve name of table selected
 	//$table = $_POST['Grocery_item'];
 	$query = "SELECT Name,Info,Calories,Price,Image FROM Grocery_item ";
 
 	$result = mysqli_query($conn, $query);
 	if (!$result) {
 		die("Query to show fields from table failed");
-	}	
+	}
 	$fields_num = mysqli_num_fields($result);
 	echo "<table border='0'><tr>";
-	
+
 // printing table headers
-	for($i=0; $i<$fields_num; $i++) {	
-		$field = mysqli_fetch_field($result);	
+	for($i=0; $i<$fields_num; $i++) {
+		$field = mysqli_fetch_field($result);
 		echo "<td><b>$field->name</b></td>";
 	}
 	echo "</tr>\n";
 	//echo "<th> Accept</th>";
-	while($row = mysqli_fetch_row($result)) {	
-		echo "<tr>";	
+	while($row = mysqli_fetch_row($result)) {
+		echo "<tr>";
 		// $row is array... foreach( .. ) puts every element
-		// of $row to $cell variable	
+		// of $row to $cell variable
 		foreach($row as $cell)
 			if(strpos($cell,'http') !== false)
-			{	
+			{
 			    echo "<td><img src=$cell></img></td>";
 			}
 			else
@@ -64,7 +66,8 @@
 
 <header>
 
-  <h2 class = "site-title"> Food United <a class = "site-signin" href="newShopper.php">Sign In</a></h2>
+  <h2 class = "site-title"> Food United <a class = "site-signin" href="newShopper.php">Sign Up</a>
+  <a class = "site-signin" href = "login.php">Login</a></h2>
 
   <ul class="navlist">
     <li class="navitem"><a href="home.php">Home</a></li>
@@ -83,5 +86,19 @@
    <p class="footerText"><a href = "https://www.twitch.tv/connor75">CONNOR75</a></p>
  </div>
 </footer>
+
+<script
+src="https://code.jquery.com/jquery-3.2.1.min.js"
+integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+crossorigin="anonymous"></script>
+
+<?php
+   session_start();
+
+   if (isset($_SESSION['user']))
+   {
+     echo "<script>$('.site-signin').hide();</script>";
+   }
+?>
 
 </body>

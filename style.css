@@ -13,8 +13,24 @@ html, body {
   min-height: 100px;
   width: 90%;
   border-style: ridge;
+  border-color: black;
   margin-left: 20px;
   border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.account-overview
+{
+  font-family: 'Slabo 27px', serif;
+  font-size: 30px;
+  margin-left: 5px;
+}
+
+.order-title
+{
+  font-family: 'Slabo 27px', serif;
+  font-size: 45px;
+  margin-top: -2px;
 }
 
 .order-table
@@ -25,14 +41,29 @@ html, body {
 
 .order-row
 {
+  font-family: 'Slabo 27px', serif;
+  font-size: 25px;
   padding: 8px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 3px solid #b5a397;
 }
 
 .order-title
 {
+  font-family: 'Slabo 27px', serif;
+  font-size: 35px;
+}
 
+.click
+{
+  font-family: 'Slabo 27px', serif;
+  font-size: 20px;
+}
+
+.total-order
+{
+  font-family: 'Slabo 27px', serif;
+  font-size: 30px;
 }
 
 .accept-order
@@ -79,10 +110,15 @@ html, body {
   padding-top: 15px;
 }
 
-.site-signin a:hover
+.site-logout
 {
-  font-size: 45px;
-  color: green;
+  font-size: 20px;
+  text-align: right;
+  float: right;
+  padding-right: 20px;
+  text-decoration: none;
+  color: #b5a397;
+  padding-top: 15px;
 }
 
 .sign-in

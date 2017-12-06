@@ -2,7 +2,7 @@
 
 <head>
 
-  <title> Register - Shopper </title>
+  <title> Log in </title>
 
   <meta charset="utf-8">
 
@@ -16,12 +16,13 @@
 
 <header>
 
-  <h2 class = "site-title"> Food United </h2>
+  <h2 class = "site-title"> Food United <a class = "site-signin" href="newShopper.php">Sign In</a></h2>
 
   <ul class="navlist">
     <li class="navitem"><a href="home.php">Home</a></li>
     <li class="navitem"><a href="about.php">About</a></li>
-    <li class="navitem"><a href="pickerAccount.php">Account</a></li>
+    <li class="navitem"><a href="itemList.php">Item List</a></li>
+     <li class="navitem"><a href="login.php">Account</a></li>
     <li class="navitem"><a href="#">History</a></li>
   </ul>
 
@@ -29,29 +30,14 @@
 
 <div class = "input-container">
 
-  <form action = "insertPicker.php" method = "post" onsubmit = "return validate()">
+  <form action = "loggedIn.php" method = "post" onsubmit = "return validate()">
     <input type = "text" name = "Username" placeholder = "Username" class = "user">
 
     <input type = "text" name = "Password" placeholder = "Password" class = "user">
 
-    <input type = "text" name = "First_name" placeholder = "First Name" class = "user">
-
-    <input type = "text" name = "Last_name" placeholder = "Last name" class = "user">
-
-    <input type = "text" name = "Phone_number" placeholder = "Phone number" class = "user">
-
-    <input type = "text" name = "Credit_card" placeholder = "Credit Card" class = "user">
-
-    <input type = "text" name = "Address" placeholder = "Address" class = "user">
-
-    <input type = "submit" value = "Submit" id = "Submit">
+    <input type = "submit" value = "Log In" id = "Submit">
   </form>
 
-    <div class = "disclaimer">
-      <a href = "newShopper.php" class = "change-link">Want to be a Shopper? Click here!</a>
-    </div>
-
-    <div class = "push"></div>
 </div>
 
 <footer>

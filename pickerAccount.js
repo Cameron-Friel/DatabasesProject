@@ -9,14 +9,17 @@ $(document).ready(function()
   {
     //e.preventDefault();
 
+    $val1 = $('.picker-name').val();
+    $val2 = $('.accept-order').val();
+
     $.ajax({
-           url : 'bin/insertJob.php', // give complete url here
+           url : 'insertJob.php', // give complete url here
            type : 'POST',
-           data : 'picker='+$('.picker-name').val()+'&order='+$('.accept-order').val(),
+           data : {picker: $val1, order: $val2},/*'picker='+$('.picker-name').val()+'&order='+$('.accept-order').val(),*/
            success : function(msg){
                alert('success');
            }
        });
-       //return false;
+       return false;
   });
 });

@@ -1,5 +1,5 @@
-//$(document).ready(function()
-//{
+$(document).ready(function()
+{
   var index = 0;
   changeImage();
 
@@ -22,4 +22,12 @@
     $images.eq(index - 1).css("display", "block");
     setTimeout(changeImage, 2000);
   }
-//});
+
+  function removeHeader()
+  {
+    if (isset($_SESSION['user']))
+    {
+      echo "<script> $('.site-sign').hide();</script>";
+    }
+  }
+});

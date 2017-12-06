@@ -17,10 +17,9 @@
   <h2 class = "site-title"> Food United </h2>
 
   <ul class="navlist">
-    <li class="navitem"><a href="home.php?'.SID.'">Home</a></li>
+    <li class="navitem"><a href="home.php">Home</a></li>
     <li class="navitem"><a href="about.php">About</a></li>
-    <li class="navitem"><a href="login.php">Account</a></li>
-    <li class="navitem"><a href="#">History</a></li>
+    <li class="navitem"><a href="itemList.php">Item List</a></li>
   </ul>
 
 </header>
@@ -40,10 +39,7 @@
     $username = mysqli_real_escape_string($conn, $_POST['Username']);
     $password = mysqli_real_escape_string($conn, $_POST['Password']);
 
-    //$sql = "SELECT Username FROM Shopper S, Picker_upper P WHERE Username =
-    //'S.$username' AND Password = 'P.$password' OR Username = 'P.$username' AND Password = 'P.$password'";
-
-    $sql = "SELECT Username FROM Shopper WHERE Username = '$username'
+    $sql = "SELECT Username FROM Picker_upper WHERE Username = '$username'
     AND Password = '$password'";
 
     $result = mysqli_query($conn, $sql);
@@ -61,29 +57,7 @@
       </script>";
       exit();
     }
-    /*else
-    {
-      $sql = "SELECT Username FROM Picker_upper WHERE Username = '$username'
-      AND Password = '$password'";
 
-      $result = mysqli_query($conn, $sql);
-
-      if (mysqli_num_rows($result) > 0)
-      {
-        //echo "<p> You have successfully logged in! </p>";
-        //$_SESSION['user'] = "fd";
-        echo "<p>Welcome back, ".$_SESSION['user']."</p>";
-        echo $_SESSION['user'];
-      }
-      else
-      {
-        echo "<script>
-        alert('Incorrect username or password');
-        window.location.href='login.php';
-        </script>";
-        exit();
-      }
-    }*/
     mysqli_free_result($result);
 
     mysqli_close($conn);

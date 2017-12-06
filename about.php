@@ -11,13 +11,14 @@
   <body>
 		<header>
 
-			<h2 class = "site-title"> Food United<a class = "site-signin" href="newShopper.php">Sign In</a>
- 		 <a class = "site-signin" href = "login.php">Login</a></h2>
+			<h2 class = "site-title"> Food United<a class = "site-signin" href="newShopper.php">Sign Up</a>
+ 		 <a class = "site-signin" href = "login.php">Login</a>
+		 <a class = "site-logout" href = "logout.php">Logout</a></h2>
 
 		 <ul class="navlist">
 			 <li class="navitem"><a href="home.php">Home</a></li>
 			 <li class="navitem"><a href="about.php">About</a></li>
-			<li class="navitem"><a href="itemList.php">Item List</a></li> 
+			<li class="navitem"><a href="itemList.php">Item List</a></li>
 			<li class="navitem"><a href="login.php">Account</a></li>
 			 <li class="navitem"><a href="#">History</a></li>
 		 </ul>
@@ -32,4 +33,22 @@
 		</div>
 	</footer>
   </body>
+
+	<script
+ src="https://code.jquery.com/jquery-3.2.1.min.js"
+ integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+ crossorigin="anonymous"></script>
+
+	<?php
+		 /*session_start();
+
+		 if (isset($_SESSION['user']))
+		 {
+			 echo "<script>$('.site-signin').hide();</script>";
+		 }
+		 else
+		 {
+
+	 	 }*/
+	?>
 </html>

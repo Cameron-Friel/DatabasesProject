@@ -12,11 +12,11 @@
 
 		<header>
 
-		 <h2 class = "site-title"> Food United<a class = "site-signin" href="newShopper.php">Sign In</a>
+		 <h2 class = "site-title"> Food United<a class = "site-signin" href="newShopper.php">Sign Up</a>
 		 <a class = "site-signin" href = "login.php">Login</a></h2>
 
 		 <ul class="navlist">
-			 <li class="navitem"><a href="home.php">Home</a></li>	
+			 <li class="navitem"><a href="home.php">Home</a></li>
 			 <li class="navitem"><a href="about.php">About</a></li>
 			 <li class="navitem"><a href="itemList.php">Item List</a></li>
 			 <li class="navitem"><a href="login.php">Account</a></li>
@@ -36,16 +36,6 @@
 		if (!$conn) {
 				die('Could not connect: ' . mysql_error());
 		}
-		 /*if (!$_SESSION['user'])
-		 {
-			 echo "<p>IN</p>";
-		 }*/
-		 echo $_SESSION['user'];
-		 if (isset($_SESSION['user']))
-		 {
-			 echo "<script>$('.site-signin').remove()</script>";
-			 echo "<p>IN</p>";
-		 }
 
 			$sql = "SELECT Image FROM Grocery_item";
 			$result = mysqli_query($conn, $sql);
@@ -54,7 +44,6 @@
 			{
 				echo "<img class = 'mySlides' src='".$row['Image']."' width='500' height='300'/>";
  			}
-
 			mysqli_free_result($result);
 			mysqli_close($conn);
 		 ?>
@@ -80,5 +69,12 @@
  crossorigin="anonymous"></script>
 
  <script type="text/javascript" src="home.js"></script>
+
+ <?php
+ 		/*if (isset($_SESSION['user']))
+ 		{
+	 		echo "<script>$('.site-signin').hide();</script>";
+ 		}*/
+ ?>
 
 </html>
