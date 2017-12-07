@@ -22,7 +22,7 @@
     <li class="navitem"><a href="about.php">About</a></li>
     <li class="navitem-both"><a href="itemList.php">Products</a></li>
     <li class="navitem-shopper"><a href="#">Cart</a></li>
-    <li class="navitem-shopper"><a href="#">History</a></li>
+    <li class="navitem-shopper"><a href="shopperHistory.php">History</a></li>
   </ul>
 
 </header>
@@ -42,18 +42,24 @@
     $username = mysqli_real_escape_string($conn, $_POST['Username']);
     $password = mysqli_real_escape_string($conn, $_POST['Password']);
 
-    //$sql = "SELECT Username FROM Shopper S, Picker_upper P WHERE Username =
-    //'S.$username' AND Password = 'P.$password' OR Username = 'P.$username' AND Password = 'P.$password'";
-
-    $sql = "SELECT Username FROM Shopper WHERE Username = '$username'
+    $sql = "SELECT Username, ShopperID FROM Shopper WHERE Username = '$username'
     AND Password = '$password'";
 
     $result = mysqli_query($conn, $sql);
 
+    $myUser = array();
+
+    while ($row = mysqli_fetch_assoc($result))
+    {
+      $myUser[] = $row;
+    }
+
     if (mysqli_num_rows($result) > 0)
     {
       $_SESSION['user'] = $username;
-      echo "<p> Welcome back, ".$_SESSION['user'].". </p>";
+      $_SESSION['id'] = $myUser[0]['ShopperID'];
+      $_SESSION['position'] = "shopper";
+      echo "<p class = 'center-message'> Welcome back, ".$_SESSION['user'].". </p>";
     }
     else
     {

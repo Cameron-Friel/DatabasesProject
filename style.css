@@ -101,6 +101,13 @@ html, body {
   padding-right: 40px;
 }
 
+.center-message
+{
+  font-family: 'Slabo 27px', serif;
+  font-size: 50px;
+  text-align: center;
+}
+
 .deliver-confirmation
 {
   display: inline-block;

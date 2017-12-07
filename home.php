@@ -1,3 +1,7 @@
+<?php
+	session_start();
+ ?>
+
 <!DOCTYPE html>
 
 <html>
@@ -31,8 +35,6 @@
 	 <div></div>
 
 		<?php
-			session_start();
-
 		include 'connectvarsEECS.php';
 
 		$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);

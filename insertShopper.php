@@ -17,18 +17,15 @@
 
   <header>
 
-   <h2 class = "site-title"> Food United </h2>
+   <h2 class = "site-title"> Food United <a class = "site-signin" href = "shopperLogin.php">Login</a></h2>
 
    <ul class="navlist">
      <li class="navitem"><a href="home.php">Home</a></li>
-     <li class="navitem"><a href="about.php">About</a></li>
-     <li class="navitem"><a href="login.php">Account</a></li>
-     <li class="navitem"><a href="#">History</a></li>
+       <li class="navitem"><a href="about.php">About</a></li>
+       <li class="navitem-both"><a href="itemList.php">Products</a></li>
    </ul>
 
  </header>
-
-  <h2> User result: </h2>
 
   <?php
     include 'connectvarsEECS.php';
@@ -97,7 +94,7 @@
 
     if (mysqli_query($conn, $query))
     {
-      echo "Record added successfully.";
+      echo "<p class = 'center-message'>Record added successfully.</p>";
     }
     else
     {

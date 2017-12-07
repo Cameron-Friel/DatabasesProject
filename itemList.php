@@ -68,14 +68,14 @@
 <header>
 
   <h2 class = "site-title"> Food United <a class = "site-signin" href="newShopper.php">Sign Up</a>
-  <a class = "site-signin" href = "shopperLogin.php">Login</a></h2>
+  <a class = "site-signin" href = "shopperLogin.php">Login</a><a class = "site-logout" href = "logout.php">Logout</a></h2>
 
   <ul class="navlist">
     <li class="navitem"><a href="home.php">Home</a></li>
     <li class="navitem"><a href="about.php">About</a></li>
     <li class="navitem-both"><a href="itemList.php">Products</a></li>
     <li class="navitem-shopper"><a href="#">Cart</a></li>
-    <li class="navitem-shopper"><a href="#">History</a></li>
+    <li class="navitem-shopper"><a href="shopperHistory.php">History</a></li>
     <li class="navitem-picker"><a href="pickerAccount.php">Orders</a></li>
     <li class="navitem-picker"><a href="pickerHistory.php">History</a></li>
   </ul>

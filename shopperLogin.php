@@ -29,7 +29,7 @@
 
 <div class = "input-container">
 
-  <form action = "loggedIn.php" method = "post" onsubmit = "return validate()">
+  <form action = "shopperLoggedIn.php" method = "post" onsubmit = "return validate()">
     <input type = "text" name = "Username" placeholder = "Username" class = "user">
 
     <input type = "text" name = "Password" placeholder = "Password" class = "user">
