@@ -21,7 +21,7 @@
     <li class="navitem"><a href="home.php">Home</a></li>
     <li class="navitem"><a href="about.php">About</a></li>
     <li class="navitem-both"><a href="itemList.php">Products</a></li>
-    <li class="navitem-shopper"><a href="#">Cart</a></li>
+    <li class="navitem-shopper"><a href="shoppingCart.php">Cart</a></li>
     <li class="navitem-shopper"><a href="shopperHistory.php">History</a></li>
   </ul>
 

@@ -214,7 +214,7 @@ html, body {
 
 .site-title
 {
-  font-family: 'Fontdiner Swanky', cursive;
+  font-family: 'Slabo 27px', cursive;
   font-size: 40px;
   padding-bottom: 20px;
   text-align: left;
@@ -483,23 +483,103 @@ html, body {
 	width: 80%;
 	margin: auto;
 	border-radius: 6px;
-	-moz-border-radius: 6px;
+  margin-bottom: 50px;
+}
+#tableZT button
+{
+  background-color: #30231d;
+  border: none;
+  color: #b5a397;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 6px;
 }
 #tableZT img
 {
-    border-radius: 8px;
-    max-width: 180px;
-    max-height: 180px;
-    padding: 2px;
+  border-radius: 8px;
+  max-width: 180px;
+  max-height: 180px;
+  padding: 2px;
 }
 #tableZT th
 {
-    //background-color: #4CAF50;
-    color: white;
+  background-color: #4CAF50;
+  color: white;
 }
 #tableZT tr:nth-child(even)
 {
-    background-color: #B5A397;
+  background-color: #B5A397;
+}
+
+#shoppingtableZT
+{
+  margin-top: 0px;
+  text-align: center;
+  margin: auto;
+  font-size: 18px;
+  font-family: 'Slabo 27px', serif;
+}
+#shoppingtableZT button
+{
+  background-color: #30231d;
+  border: none;
+  color: #b5a397;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 6px;
+}
+#shoppingtableZT table
+{
+  border-collapse: collapse;
+  width: 90%;
+  margin: auto;
+  border-radius: 6px;
+  margin-left: 10px;
+  margin-bottom: 50px;
+
+}
+#shoppingtableZT img
+{
+  border-radius: 8px;
+  max-width: 180px;
+  max-height: 180px;
+  padding: 2px;
+}
+#shoppingtableZT th
+{
+  background-color: #4CAF50;
+  color: white;
+}
+#shoppingtableZT tr:nth-child(even)
+{
+  background-color: #B5A397;
+}
+
+#total h2
+{
+  margin-left: 50px;
+  text-align: left;
+  display: inline-block;
+  font-family: 'Slabo 27px', serif;
+}
+
+#total button
+{
+  text-align: center;
+  float: right;
+  background-color: #30231d;
+  border: none;
+  color: #b5a397;
+  padding: 0px 0px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 6px;
 }
 
 /*Footer*/

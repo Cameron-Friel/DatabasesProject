@@ -20,7 +20,7 @@
 			 <li class="navitem"><a href="home.php">Home</a></li>
 			 <li class="navitem"><a href="about.php">About</a></li>
 			 <li class="navitem"><a href="itemList.php">Products</a></li>
-			 <li class="navitem"><a href="#">Cart</a></li>
+			 <li class="navitem"><a href="shoppingCart.php">Cart</a></li>
 			 <li class="navitem"><a href="shopperHistory.php">History</a></li>
 		 </ul>
 
