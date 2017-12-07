@@ -18,18 +18,20 @@
 
 <header>
 
-  <h2 class = "site-title"> Food United <a class = "site-signin" href="newShopper.php">Sign Up</a>
-  <a class = "site-signin" href = "shopperLogin.php">Login</a></h2>
+	 <h2 class = "site-title"> Food United<a class = "site-signin" href="newShopper.php">Sign Up</a>
+	 <a class = "site-signin" href = "shopperLogin.php">Login</a><a class = "site-logout" href = "logout.php">Logout</a></h2>
 
-  <ul class="navlist">
-    <li class="navitem"><a href="home.php">Home</a></li>
-    <li class="navitem"><a href="about.php">About</a></li>
-    <li class="navitem"><a href="itemList.php">Item List</a></li>
-    <li class="navitem"><a href="shopperLogin.php">Account</a></li>
-    <li class="navitem"><a href="#">History</a></li>
-  </ul>
+	 <ul class="navlist">
+		<li class="navitem"><a href="home.php">Home</a></li>
+			<li class="navitem"><a href="about.php">About</a></li>
+			<li class="navitem-both"><a href="itemList.php">Products</a></li>
+			<li class="navitem-shopper"><a href="shoppingCart.php">Cart</a></li>
+			<li class="navitem-shopper"><a href="shopperHistory.php">History</a></li>
+			<li class="navitem-picker"><a href="pickerAccount.php">Orders</a></li>
+			<li class="navitem-picker"><a href="pickerHistory.php">History</a></li>
+	 </ul>
 
-</header>
+	 </header>
 
 <footer>
  <div class="pageFooter">
@@ -53,6 +55,24 @@
 	}
 // Retrieve name of table selected
 	//$table = $_POST['Grocery_item'];
+
+	$query = "SELECT max(shoppingID) FROM Shopping_cart where ShopperID = '".$_SESSION['id']."'";
+
+  //echo $query;
+
+  $result = mysqli_query($conn, $query);
+  if (!$result) {
+    die("You are not Logged in!");
+  }
+
+  $shoppingIDS = array();
+
+	while ($shoppingID = mysqli_fetch_assoc($result))
+	{
+		$shoppingIDS[] = $shoppingID;
+	}
+
+
 	$query = "SELECT Name,Info,Calories,Price,Image FROM Grocery_item ";
 
 	$result = mysqli_query($conn, $query);
@@ -69,22 +89,22 @@
 	}
 	echo "</tr>\n";
 	//echo "<th> Accept</th>";
-	while($row = mysqli_fetch_row($result)) {
-		echo "<tr>";
-		// $row is array... foreach( .. ) puts every element
-		// of $row to $cell variable
-		foreach($row as $cell)
-			if(strpos($cell,'http') !== false)
-			{
-			    echo "<td><img src=$cell></img></td>";
-			}
-			else
-			{
-			    echo "<td>$cell</td>";
-			}
-		echo "<td><button>Add to Cart</button></td>";
-		echo "</tr>\n";
-	}
+	while($row = mysqli_fetch_array($result)) {
+    echo "<tbody data-link='row' class='rowlink'>";
+    echo "<tr>";
+    echo "<td class = 'name'>" . $row['Info'] . "</td>";
+    echo "<td>" . $row['Info'] . "</td>";
+    echo "<td>" . $row['Calories'] . "</td>";
+    echo "<td>" . $row['Price'] . "</td>";
+    echo "<td><img src ='" . $row['Image'] . "'></img></td>";
+    echo "<form action ='removeCart.php' type='post'>";
+    echo "<input type = 'text' name = 'name' value = '".$row['Name']."' class = 'nameZT' style = 'display:none'>";
+    echo "<input type = 'text' name = 'shoppingID' value = '".$shoppingIDS[0]['max(shoppingID)']."' class = 'currsess' style = 'display:none'>";
+    echo "<td><button class='buttonZT'>Add to Cart</button></td>";
+    echo "</form>";
+    echo "</tr>";
+    echo "</tbody>";    
+    }
 	mysqli_free_result($result);
 	mysqli_close($conn);
 ?>
@@ -96,16 +116,32 @@
 
 
 <script
-src="https://code.jquery.com/jquery-3.2.1.min.js"
-integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-crossorigin="anonymous"></script>
+ src="https://code.jquery.com/jquery-3.2.1.min.js"
+ integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+ crossorigin="anonymous"></script>
+
+ <script type="text/javascript" src="itemList.js"></script>
 
 <?php
-   session_start();
-
-   if (isset($_SESSION['user']))
-   {
-     echo "<script>$('.site-signin').hide();</script>";
-   }
-?>
+ if (isset($_SESSION['user']))
+ {
+	 if ($_SESSION['position'] == "employee")
+	 {
+		 echo "<script>$('.navitem-shopper').hide();</script>";
+		 echo "<script>$('.navitem-both').hide();</script>";
+		 echo "<script>$('.site-signin').hide();</script>";
+	 }
+	 else
+	 {
+		 echo "<script>$('.site-signin').hide();</script>";
+		 echo "<script>$('.navitem-picker').hide();</script>";
+	 }
+ }
+ else
+ {
+	 echo "<script>$('.site-logout').hide();</script>";
+	 echo "<script>$('.navitem-shopper').hide();</script>";
+	 echo "<script>$('.navitem-picker').hide();</script>";
+ }
+ ?>
 </html>

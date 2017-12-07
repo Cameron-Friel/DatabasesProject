@@ -17,18 +17,20 @@
 
 		<header>
 
-  <h2 class = "site-title"> Food United <a class = "site-signin" href="newShopper.php">Sign Up</a>
-		 <a class = "site-signin" href = "shopperLogin.php">Login</a></h2>
+     <h2 class = "site-title"> Food United<a class = "site-signin" href="newShopper.php">Sign Up</a>
+     <a class = "site-signin" href = "shopperLogin.php">Login</a><a class = "site-logout" href = "logout.php">Logout</a></h2>
 
-		 <ul class="navlist">
-			 <li class="navitem"><a href="home.php">Home</a></li>
-			 <li class="navitem"><a href="about.php">About</a></li>
-       <li class="navitem"><a href="itemList.php">Item List</a></li>
-			 <li class="navitem"><a href="shopperLogin.php">Account</a></li>
-			 <li class="navitem"><a href="#">History</a></li>
-		 </ul>
+     <ul class="navlist">
+      <li class="navitem"><a href="home.php">Home</a></li>
+      <li class="navitem"><a href="about.php">About</a></li>
+      <li class="navitem-both"><a href="itemList.php">Products</a></li>
+      <li class="navitem-shopper"><a href="shoppingCart.php">Cart</a></li>
+      <li class="navitem-shopper"><a href="shopperHistory.php">History</a></li>
+      <li class="navitem-picker"><a href="pickerAccount.php">Orders</a></li>
+      <li class="navitem-picker"><a href="pickerHistory.php">History</a></li>
+     </ul>
 
-	 </header>
+   </header>
 
    <h3 class = "account-overview">Your Cart: </h3>
 
@@ -36,6 +38,7 @@
 
 <?php
 
+  
     session_start();
 
   include 'connectvarsEECS.php';
@@ -46,7 +49,23 @@
   }
 // Retrieve name of table selected
   //$table = $_POST['Grocery_item'];
-  $query = "SELECT Total FROM Shopping_cart where shoppingID = 1;";
+  $query = "SELECT max(shoppingID) FROM Shopping_cart where shopperID = '".$_SESSION['id']."'";
+
+  $result = mysqli_query($conn, $query);
+  if (!$result) {
+    die("You are not Logged in!");
+  }
+
+  $shoppingIDS = array();
+
+  while ($shoppingID = mysqli_fetch_assoc($result))
+    {
+      $shoppingIDS[] = $shoppingID;
+    }
+
+    echo $shoppingIDS[0]['ShoppingID'];
+
+  $query = "SELECT Total FROM Shopping_cart where shoppingID = '".$shoppingIDS[0]['max(shoppingID)']."';";
 
   $result = mysqli_query($conn, $query);
   if (!$result) {
@@ -69,9 +88,6 @@
 
    <div id="shoppingtableZT">
     <?php
-
-    session_start();
-
   include 'connectvarsEECS.php';
 
       $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -79,7 +95,9 @@
     die('Could not connect: ' . mysql_error());
   }
 
-  $query = "SELECT max(shoppingID) FROM Shopping_cart where shopperID = ".$_SESSION['user'].";";
+  $query = "SELECT max(shoppingID) FROM Shopping_cart where ShopperID = '".$_SESSION['id']."'";
+
+  //echo $query;
 
   $result = mysqli_query($conn, $query);
   if (!$result) {
@@ -92,14 +110,16 @@
     {
       $shoppingIDS[] = $shoppingID;
     }
-
+    //echo $shoppingIDS[0]['ShoppingID'];
 // Retrieve name of table selected
   //$table = $_POST['Grocery_item'];
-  $query = "SELECT Name,Info,Calories,Price,Image FROM Grocery_item tblg, Purchased_item tblp where tblp.itemID = tblg.itemID and tblp.ShoppingID = ".shoppingIDS[0]['ShoppingID'].";";
+  $query = "SELECT Name,Info,Calories,Price,Image,Quantity FROM Grocery_item tblg, Purchased_item tblp where tblp.itemID = tblg.itemID and tblp.ShoppingID = '".$shoppingIDS[0]['max(shoppingID)']."'";
+
+  //echo $query;
 
   $result = mysqli_query($conn, $query);
   if (!$result) {
-    die("Query to show fields from table failed");
+    die("Nothing is in your cart!");
   }
   $fields_num = mysqli_num_fields($result);
   echo "<table border='1' rules=none><tr>";
@@ -112,22 +132,24 @@
   echo "<td><b>Remove</b></td>";
   echo "</tr>\n";
   //echo "<th> Accept</th>";
-  while($row = mysqli_fetch_row($result)) {
+  while($row = mysqli_fetch_array($result)) {
+
+    echo "<tbody data-link='row' class='rowlink'>";
     echo "<tr>";
-    // $row is array... foreach( .. ) puts every element
-    // of $row to $cell variable
-    foreach($row as $cell)
-      if(strpos($cell,'http') !== false)
-      {
-          echo "<td><img src=$cell></img></td>";
-      }
-      else
-      {
-          echo "<td>$cell</td>";
-      }
-    echo "<td><button>Remove from Cart</button></td>";
-    echo "</tr>\n";
-  }
+    echo "<td><div id = 'name'>" . $row['Name'] . "</div></td>";
+    echo "<td>" . $row['Info'] . "</td>";
+    echo "<td>" . $row['Calories'] . "</td>";
+    echo "<td>" . $row['Price'] . "</td>";
+    echo "<td><img src ='" . $row['Image'] . "'></img></td>";
+    echo "<td>" . $row['Quantity'] . "</td>";
+    echo "<form action ='removeCart.php' type='post'>";
+    echo "<input type = 'text' name = 'name' value = '".$row['Name']."' class = 'nameZT' style = 'display:none'>";
+    echo "<input type = 'text' name = 'shoppingID' value = '".$shoppingIDS[0]['max(shoppingID)']."' class = 'currsess' style = 'display:none'>";
+    echo "<td><button class='buttonZT'>Remove from Cart</button></td>";
+    echo "</form>";
+    echo "</tr>";
+    echo "</tbody>";    
+    }
 
   mysqli_free_result($result);
   mysqli_close($conn);
@@ -145,10 +167,32 @@
 </body>
 
 <script
-src="https://code.jquery.com/jquery-3.2.1.min.js"
-integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-crossorigin="anonymous"></script>
+ src="https://code.jquery.com/jquery-3.2.1.min.js"
+ integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+ crossorigin="anonymous"></script>
 
-<script type="text/javascript" src="pickerAccount.js"></script>
+ <script type="text/javascript" src="shoppingCart.js"></script>
+<?php
+ if (isset($_SESSION['user']))
+ {
+   if ($_SESSION['position'] == "employee")
+   {
+     echo "<script>$('.navitem-shopper').hide();</script>";
+     echo "<script>$('.navitem-both').hide();</script>";
+     echo "<script>$('.site-signin').hide();</script>";
+   }
+   else
+   {
+     echo "<script>$('.site-signin').hide();</script>";
+     echo "<script>$('.navitem-picker').hide();</script>";
+   }
+ }
+ else
+ {
+   echo "<script>$('.site-logout').hide();</script>";
+   echo "<script>$('.navitem-shopper').hide();</script>";
+   echo "<script>$('.navitem-picker').hide();</script>";
+ }
+ ?>
 
 </html>
