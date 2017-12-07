@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <html>
 	<head>
 		<title>Your Shopping Cart</title>
@@ -7,7 +9,7 @@
 		<link rel="stylesheet" href="style.css">
 
     <link rel="icon" href="https://image.flaticon.com/icons/png/512/2/2772.png">
-
+  
 		<link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
 	</head>
 
@@ -15,15 +17,15 @@
 
 		<header>
 
-  <h2 class = "site-title"> Food United <img src="https://image.flaticon.com/icons/png/512/2/2772.png"></img> <a class = "site-signin" href="newShopper.php">Sign Up</a>
-		 <a class = "site-signin" href = "login.php">Login</a></h2>
+  <h2 class = "site-title"> Food United <a class = "site-signin" href="newShopper.php">Sign Up</a>
+		 <a class = "site-signin" href = "shopperLogin.php">Login</a></h2>
 
 		 <ul class="navlist">
 			 <li class="navitem"><a href="home.php">Home</a></li>
 			 <li class="navitem"><a href="about.php">About</a></li>
-       <li class="navitem"><a href="itemList.php">Products</a></li>
-			 <li class="navitem"><a href="shoppingCart.php">Cart</a></li>
-			 <li class="navitem"><a href="shoppingHistory.php">History</a></li>
+       <li class="navitem"><a href="itemList.php">Item List</a></li>
+			 <li class="navitem"><a href="shopperLogin.php">Account</a></li>
+			 <li class="navitem"><a href="#">History</a></li>
 		 </ul>
 
 	 </header>
@@ -81,7 +83,7 @@
 
   $result = mysqli_query($conn, $query);
   if (!$result) {
-    die("Query to show fields from table failed");
+    die("You are not Logged in!");
   }
 
   $shoppingIDS = array();
@@ -93,7 +95,7 @@
 
 // Retrieve name of table selected
   //$table = $_POST['Grocery_item'];
-  $query = "SELECT Name,Info,Calories,Price,Image,Quantity FROM Grocery_item tblg, Purchased_item tblp where tblp.itemID = tblg.itemID and tblp.ShoppingID = ".shoppingIDS[0]['ShoppingID'].";";
+  $query = "SELECT Name,Info,Calories,Price,Image FROM Grocery_item tblg, Purchased_item tblp where tblp.itemID = tblg.itemID and tblp.ShoppingID = ".shoppingIDS[0]['ShoppingID'].";";
 
   $result = mysqli_query($conn, $query);
   if (!$result) {
