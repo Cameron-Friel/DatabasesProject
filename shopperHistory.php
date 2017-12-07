@@ -19,8 +19,9 @@
 		 <ul class="navlist">
 			 <li class="navitem"><a href="home.php">Home</a></li>
 			 <li class="navitem"><a href="about.php">About</a></li>
-			 <li class="navitem"><a href="pickerAccount.php">Orders</a></li>
-			 <li class="navitem"><a href="pickerHistory.php">History</a></li>
+			 <li class="navitem"><a href="itemList.php">Products</a></li>
+			 <li class="navitem"><a href="shoppingCart.php">Cart</a></li>
+			 <li class="navitem"><a href="shopperHistory.php">History</a></li>
 		 </ul>
 
 	 </header>
@@ -37,13 +38,13 @@
        die('Could not connect: ' . mysql_error());
      }
 
-     $query = "SELECT O.OrderID, O.Picker_signature, O.Picker_signature, S.Address, S.First_name,
+     $query = "SELECT O.OrderID, O.Picker_signature, O.Shopper_signature, S.Address, S.First_name,
      S.Last_name, P.First_name AS 'Picker_first', P.Last_name AS 'Picker_last' FROM Shopper S,
      Orders O, Picker_upper P WHERE O.EmployeeID = '".$_SESSION['id']."' AND S.ShopperID = O.ShopperID
 		 AND P.EmployeeID = '".$_SESSION['id']."' GROUP BY O.OrderID";
 
 		 $secondQuery = "SELECT O.OrderID, S.Total, G.Name, P.Quantity FROM Orders O, Grocery_item G, Purchased_item P,
-		 Shopping_cart S, Shopper Sh WHERE O.EmployeeID = '".$_SESSION['id']."' AND O.ShoppingID = S.ShoppingID AND
+		 Shopping_cart S, Shopper Sh WHERE O.ShopperID = '".$_SESSION['id']."' AND O.ShoppingID = S.ShoppingID AND
 		 S.ShoppingID = P.ShoppingID AND P.ItemID = G.ItemID AND Sh.ShopperID = S.ShopperID
 		 ORDER BY O.OrderID";
 
@@ -79,6 +80,7 @@
        {
          $pSignature = "Yes";
        }
+
        if ($histories[$i]['Shopper_signature'] == 0)
        {
          $sSignature = "No";
@@ -87,6 +89,7 @@
        {
          $sSignature = "Yes";
        }
+
        echo "<div class = 'order-container'>";
        echo "<h2 class = 'order-title'>Order ".$histories[$i]['OrderID']."</h2>";
        echo "<div class = 'address-title'> Address: ".$histories[$i]['Address']."</div>";
@@ -97,16 +100,17 @@
        echo "</tr>";
        echo "<tr>";
        echo "<td class = 'history-row'>Shopper: ".$histories[$i]['First_name']." ".$histories[$i]['Last_name']."</td>";
-       echo "<td class = 'history-row'><button class = '".$sSignature."-not'>".$sSignature."</button></td>";
+       echo "<form action = 'insertShopperSig.php' type = 'post'>";
+       echo "<input type = 'text' name = 'signature' value = '1' class = 'sig-name' style = 'display:none'>";
+       echo "<input type = 'text' name = 'order' value = '".$histories[$i]['OrderID']."' class = 'sig-name' style = 'display:none'>";
+			 echo "<input type = 'text' name = 'employee' value = '".$_SESSION['id']."' class = 'sig-name' style = 'display:none'>";
+			 echo "<td class = 'history-row'><button type = 'submit' class = '".$sSignature."'>".$sSignature."</button></td>";
+       echo "</form>";
        echo "</tr>";
        echo "<tr>";
        echo "<td class = 'history-row'>Deliverer: ".$histories[$i]['Picker_first']." ".$histories[$i]['Picker_last']."</td>";
        echo "<form action = 'insertSignature.php' type = 'post'>";
-       echo "<input type = 'text' name = 'signature' value = '1' class = 'sig-name' style = 'display:none'>";
-       echo "<input type = 'text' name = 'order' value = '".$histories[$i]['OrderID']."' class = 'sig-name' style = 'display:none'>";
-			 echo "<input type = 'text' name = 'employee' value = '".$_SESSION['id']."' class = 'sig-name' style = 'display:none'>";
-			 echo "<td class = 'history-row'><button type = 'submit' class = '".$pSignature."'>".$pSignature."</button></td>";
-       echo "</form>";
+			 echo "<td class = 'history-row'><button type = 'submit' class = '".$pSignature."-not'>".$pSignature."</button></td>";
        echo "</tr>";
        echo "</table>";
 			 echo "<table class = 'order-table'>";
@@ -147,13 +151,13 @@
      </footer>
 
    </body>
-	 
+
    <script
    src="https://code.jquery.com/jquery-3.2.1.min.js"
    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
    crossorigin="anonymous"></script>
 
-   <script type="text/javascript" src="pickerHistory.js"></script>
+   <script type="text/javascript" src="shopperHistory.js"></script>
 
    <?php
    	 if (isset($_SESSION['user']))

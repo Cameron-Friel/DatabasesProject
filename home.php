@@ -1,3 +1,7 @@
+<?php
+	session_start();
+ ?>
+
 <!DOCTYPE html>
 
 <html>
@@ -20,7 +24,7 @@
 			<li class="navitem"><a href="home.php">Home</a></li>
  			<li class="navitem"><a href="about.php">About</a></li>
  			<li class="navitem-both"><a href="itemList.php">Products</a></li>
- 			<li class="navitem-shopper"><a href="#">Cart</a></li>
+ 			<li class="navitem-shopper"><a href="shoppingCart.php">Cart</a></li>
  			<li class="navitem-shopper"><a href="shopperHistory.php">History</a></li>
  			<li class="navitem-picker"><a href="pickerAccount.php">Orders</a></li>
  			<li class="navitem-picker"><a href="pickerHistory.php">History</a></li>
@@ -31,8 +35,6 @@
 	 <div></div>
 
 		<?php
-			session_start();
-
 		include 'connectvarsEECS.php';
 
 		$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);

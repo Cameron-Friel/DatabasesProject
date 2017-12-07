@@ -13,7 +13,7 @@
 		<header>
 
 			<h2 class = "site-title"> Food United<a class = "site-signin" href="newShopper.php">Sign Up</a>
- 		 <a class = "site-signin" href = "login.php">Login</a></h2>
+ 		 <a class = "site-signin" href = "shopperLogin.php">Login</a></h2>
 
 		 <ul class="navlist">
 			 <li class="navitem"><a href="home.php">Home</a></li>
@@ -26,7 +26,7 @@
    <?php
       session_start();
 
-      echo "<p>You have logged out successfully, ".$_SESSION['user'].".</p>";
+      echo "<p class = 'center-message'>You have logged out successfully, ".$_SESSION['user'].".</p>";
 
       session_destroy();
    ?>

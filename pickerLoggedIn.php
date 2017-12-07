@@ -58,7 +58,7 @@
       $_SESSION['user'] = $username;
       $_SESSION['id'] = $myUser[0]['EmployeeID'];
       $_SESSION['position'] = "employee";
-      echo "<p> Welcome back, ".$_SESSION['user'].". </p>";
+      echo "<p class = 'center-message'> Welcome back, ".$_SESSION['user'].". </p>";
     }
     else
     {
