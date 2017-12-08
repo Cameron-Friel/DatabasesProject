@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<!-- This page is registering pickerupers in html. -->
 <head>
 
   <title> Register - Shopper </title>

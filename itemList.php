@@ -73,7 +73,7 @@
 	}
 
 
-	$query = "SELECT Name,Info,Calories,Price,Image FROM Grocery_item ";
+	$query = "SELECT Name,Info,Calories,Price,Image,itemID FROM Grocery_item ";
 
 	$result = mysqli_query($conn, $query);
 	if (!$result) {
@@ -83,7 +83,7 @@
 	echo "<table border='0'><tr>";
 
 // printing table headers
-	for($i=0; $i<$fields_num; $i++) {
+	for($i=1; $i<$fields_num; $i++) {
 		$field = mysqli_fetch_field($result);
 		echo "<td><b>$field->name</b></td>";
 	}
@@ -98,7 +98,7 @@
     echo "<td>" . $row['Price'] . "</td>";
     echo "<td><img src ='" . $row['Image'] . "'></img></td>";
     echo "<form action ='removeCart.php' type='post'>";
-    echo "<input type = 'text' name = 'name' value = '".$row['Name']."' class = 'nameZT' style = 'display:none'>";
+    echo "<input type = 'text' name = 'itemID' value = '".$row['itemID']."' class = 'nameZT' style = 'display:none'>";
     echo "<input type = 'text' name = 'shoppingID' value = '".$shoppingIDS[0]['max(shoppingID)']."' class = 'currsess' style = 'display:none'>";
     echo "<td><button class='buttonZT'>Add to Cart</button></td>";
     echo "</form>";

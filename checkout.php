@@ -10,7 +10,7 @@
 	$itemID = $_POST['ItemID'];
 	$shoppingID = $_POST['shoppingID'];
 
-	$query = "DELETE FROM Purchased_item WHERE shoppingID = '$shoppingID' AND itemID = '$itemID'";
+	$query = "INSERT INTO `Orders` (`OrderID`, `EmployeeID`, `ShopperID`, `ShoppingID`, `Total`, `Shopper_signature`, `Picker_signature`) VALUES ('4', NULL, '2', '2', '0', '0', '0');";
 
 	mysqli_query($conn, $query);
 

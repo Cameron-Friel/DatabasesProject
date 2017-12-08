@@ -581,6 +581,30 @@ html, body {
   font-size: 16px;
   border-radius: 6px;
 }
+#total button:hover
+{
+  cursor: pointer;
+}
+#tableZT button:hover
+{
+  cursor: pointer;
+}
+#shoppingtableZT button:hover
+{
+  cursor: pointer;
+}
+
+.about img
+{
+  max-width: 40%;
+  max-height: 40%;
+  margin: auto;
+}
+.about
+{
+  text-align: center;
+}
+
 
 /*Footer*/
 

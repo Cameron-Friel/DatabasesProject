@@ -1,3 +1,5 @@
+
+//THIS FILE CALLS AJAX TO POST TO PHP
 $(document).ready(function()
 {
 
@@ -10,7 +12,7 @@ $(document).ready(function()
     console.log(message);
 
     $.ajax({
-           url : 'removeCart.php', // give complete url here
+           url : 'addToCart.php',
            type : 'POST',
            data : message,
            success : function(msg){

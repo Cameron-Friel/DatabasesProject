@@ -37,9 +37,9 @@
    <div id="total">
 
 <?php
-
   
-    session_start();
+  
+    session_start(); //start session
 
   include 'connectvarsEECS.php';
 
@@ -49,7 +49,7 @@
   }
 // Retrieve name of table selected
   //$table = $_POST['Grocery_item'];
-  $query = "SELECT max(shoppingID) FROM Shopping_cart where shopperID = '".$_SESSION['id']."'";
+  $query = "SELECT max(shoppingID) FROM Shopping_cart where shopperID = '".$_SESSION['id']."'"; //query returns the curr users curr shopping cart
 
   $result = mysqli_query($conn, $query);
   if (!$result) {
@@ -61,11 +61,12 @@
   while ($shoppingID = mysqli_fetch_assoc($result))
     {
       $shoppingIDS[] = $shoppingID;
-    }
+    } //this stores the shopping cart in an array
 
-    echo $shoppingIDS[0]['ShoppingID'];
+    //echo $shoppingIDS[0]['ShoppingID'];
 
-  $query = "SELECT Total FROM Shopping_cart where shoppingID = '".$shoppingIDS[0]['max(shoppingID)']."';";
+
+  $query = "SELECT Total,shoppingID FROM Shopping_cart where shoppingID = '".$shoppingIDS[0]['max(shoppingID)']."';"; //this query returns the total for the users shopping cart
 
   $result = mysqli_query($conn, $query);
   if (!$result) {
@@ -78,9 +79,17 @@
     {
       $totals[] = $total;
     }
-    echo "<h2>Total:  ".$totals[0]['Total']."</h2>";
-    echo "<h2><button>Checkout</button></h2>";
 
+  echo "<h2>Total:  ".$totals[0]['Total']."</h2>";
+  echo "<form action ='checkout.php' id='check' class='check' type='post'>";
+  echo "<input type = 'text' name = 'shoppingID' value = '".$row['shoppingID']."' class = 'nameZT' style = 'display:none'>";
+  echo "<input type = 'text' name = 'Total' value = '".$row['Total']."' class = 'nameZT' style = 'display:none'>";
+  echo "<input type = 'text' name = 'ItemID' value = '".$_SESSION['id']."' class = 'nameZT' style = 'display:none'>";
+  echo "<input type = 'text' name = 'shoppingID' value = '".$shoppingIDS[0]['max(shoppingID)']."' class = 'currsess' style = 'display:none'>";
+  echo "<h2><button>Checkout</button></h2>";
+  echo "</form>";
+    
+//this prints out the users shopping cart
   mysqli_free_result($result);
   mysqli_close($conn);
 ?>
@@ -113,7 +122,7 @@
     //echo $shoppingIDS[0]['ShoppingID'];
 // Retrieve name of table selected
   //$table = $_POST['Grocery_item'];
-  $query = "SELECT Name,Info,Calories,Price,Image,Quantity FROM Grocery_item tblg, Purchased_item tblp where tblp.itemID = tblg.itemID and tblp.ShoppingID = '".$shoppingIDS[0]['max(shoppingID)']."'";
+  $query = "SELECT Name,Info,Calories,Price,Image,Quantity,tblp.ItemID FROM Grocery_item tblg, Purchased_item tblp where tblp.itemID = tblg.itemID and tblp.ShoppingID = '".$shoppingIDS[0]['max(shoppingID)']."'";
 
   //echo $query;
 
@@ -125,7 +134,7 @@
   echo "<table border='1' rules=none><tr>";
 
 // printing table headers
-  for($i=0; $i<$fields_num; $i++) {
+  for($i=1; $i<$fields_num; $i++) {
     $field = mysqli_fetch_field($result);
     echo "<td><b>$field->name</b></td>";
   }
@@ -133,7 +142,7 @@
   echo "</tr>\n";
   //echo "<th> Accept</th>";
   while($row = mysqli_fetch_array($result)) {
-
+     //these statements are to print out the html tables in the correct formatting with what the user has
     echo "<tbody data-link='row' class='rowlink'>";
     echo "<tr>";
     echo "<td><div id = 'name'>" . $row['Name'] . "</div></td>";
@@ -143,7 +152,7 @@
     echo "<td><img src ='" . $row['Image'] . "'></img></td>";
     echo "<td>" . $row['Quantity'] . "</td>";
     echo "<form action ='removeCart.php' type='post'>";
-    echo "<input type = 'text' name = 'name' value = '".$row['Name']."' class = 'nameZT' style = 'display:none'>";
+    echo "<input type = 'text' name = 'ItemID' value = '".$row['ItemID']."' class = 'nameZT' style = 'display:none'>";
     echo "<input type = 'text' name = 'shoppingID' value = '".$shoppingIDS[0]['max(shoppingID)']."' class = 'currsess' style = 'display:none'>";
     echo "<td><button class='buttonZT'>Remove from Cart</button></td>";
     echo "</form>";
@@ -175,6 +184,7 @@
 <?php
  if (isset($_SESSION['user']))
  {
+  //These hide items based on what kind of session the user is in
    if ($_SESSION['position'] == "employee")
    {
      echo "<script>$('.navitem-shopper').hide();</script>";

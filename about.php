@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 
+<!-- this page has no value other than just displaying some basic information about our website-->
+
 <html>
 	<head>
 		<title>About</title>
@@ -12,7 +14,7 @@
   <body>
 		<header>
 
-			<h2 class = "site-title"> Food United<a class = "site-signin" href="newShopper.php">Sign Up</a>
+		<h2 class = "site-title"> Food United<a class = "site-signin" href="newShopper.php">Sign Up</a>
  		 <a class = "site-signin" href = "shopperLogin.php">Login</a><a class = "site-logout" href = "logout.php">Logout</a></h2>
 
 		 <ul class="navlist">
@@ -26,6 +28,12 @@
 		 </ul>
 
 	 </header>
+
+	<div class = "about">
+	<p><img src = "https://image.flaticon.com/icons/png/512/2/2772.png"></img></p> 
+	<p>This website is all about getting the products you want to you as fast as possible</p>
+	</div>
+	<div class = "push"></div>
 
 	 <footer>
 		<div class="pageFooter">
